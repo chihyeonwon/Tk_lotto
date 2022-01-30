@@ -118,13 +118,16 @@ url = "https://dhlottery.co.kr/gameResult.do?method=byWin&drwNo={}".format(n)
 req = requests.get(url)
 req.text
 ```
-지금까지의 입력창의 숫자를 받아 웹사이트에서 필요한 정보를 크롤링해서 출력해주는 것들을 lotto_p라는 함수로 선언한 뒤 command 의 옵션으로 이 함수를 넣어주면 최종코드는 
+
+## 최종 코드와 프로그램 실행 결과
+
+최종 코드는 다음과 같습니다.
 ```python
 from tkinter import *
 
 win = Tk()
-win.geometry("300x100")
-win.option_add("*Font", "궁서 20")
+win.geometry("1000x500")
+win.option_add("*Font", "궁서 15")
 
 ent = Entry(win)
 ent.pack()
@@ -141,10 +144,8 @@ def lotto_p():
     txt = soup.find("div", attrs={"class", "win_result"}).get_text()
     num_list = txt.split("\n")[7:13]
     bonus = txt.split("\n")[-4]
-    print("당첨번호")
-    print(num_list)
-    print("보너스번호")
-    print(bonus)
+    btn.config(text="{}회차의 로또 당첨 번호는 {}이고 보너스 번호는 {}입니다.".format(
+        n, num_list, bonus))
 
 
 btn = Button(win)
@@ -154,5 +155,10 @@ btn.pack()
 win.mainloop()
 ```
 
+프로그램을 실행하면 다음과 같습니다.
+![lotto](https://user-images.githubusercontent.com/58906858/151690109-d4e4bfc9-57e8-467f-94f9-af23f91419e1.png)
+
+입력창에 예로 999를 입력하고 로또 당첨 번호 확인 버튼을 누르면 999회차의 로또번호를 보너스번호와 함께 버튼에 출력해줍니다.
+![lotto1](https://user-images.githubusercontent.com/58906858/151690181-b7e22af4-7802-4676-8600-85bcddcd46a9.png)
 
 
